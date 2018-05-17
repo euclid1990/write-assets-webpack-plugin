@@ -1,0 +1,3 @@
+# ignore builded javascript/css/image files
+/dist
+index.html

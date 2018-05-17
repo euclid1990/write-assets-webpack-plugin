@@ -1,0 +1,8 @@
+src
+npx
+node_modules
+example/assets/js
+example/assets/css
+example/assets/img
+example/assets/index.html
+example/node_modules

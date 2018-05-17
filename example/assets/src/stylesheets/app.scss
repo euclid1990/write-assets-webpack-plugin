@@ -1,0 +1,62 @@
+@mixin margin-left-right($left, $right) {
+    margin-left: $left;
+    margin-right: $right;
+}
+
+@mixin margin-top-bottom($top, $bottom) {
+    margin-top: $top;
+    margin-bottom: $bottom;
+}
+
+@mixin margin-top($top) {
+    margin-top: $top;
+}
+
+@mixin margin-bottom($bottom) {
+    margin-bottom: $bottom;
+}
+
+@mixin margin-left($top) {
+    margin-left: $top;
+}
+
+@mixin margin-right($top) {
+    margin-right: $top;
+}
+
+@mixin padding-left-right($left, $right) {
+    padding-left: $left;
+    padding-right: $right;
+}
+
+@mixin padding-top-bottom($top, $bottom) {
+    padding-top: $top;
+    padding-bottom: $bottom;
+}
+
+.margin-top-10 {
+    @include margin-top(10px);
+}
+
+.margin-bottom-10 {
+    @include margin-bottom(10px);
+}
+
+.margin-left-15 {
+    @include margin-left(15px);
+}
+
+.break-word {
+    word-wrap: break-word;
+}
+
+.pre-wrap {
+    white-space: pre-wrap;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: url(../images/bg/background.jpg) no-repeat center center fixed;
+}
