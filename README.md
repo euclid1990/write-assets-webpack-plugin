@@ -87,5 +87,5 @@ $ npm adduser --registry  http://localhost:4873
 # Publishing the package locally
 $ npm publish --registry http://localhost:4873
 # Install package from locally registry
-$ npm install webpack-dev-write-to-disk --registry http://localhost:4873
+$ npm install write-assets-webpack-plugin --registry http://localhost:4873
 ```
