@@ -1,6 +1,6 @@
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
-[![npm][npm]][npm-download]
+![npm][npm-download]
 [![deps][deps]][deps-url]
 [![tests][tests]][tests-url]
 
