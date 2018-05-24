@@ -1,3 +1,4 @@
 /node_modules/*
 /dist/*
+/compiled_tests/*
 /example/assets/dist/*

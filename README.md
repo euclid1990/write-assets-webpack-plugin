@@ -26,9 +26,17 @@
   <div>
     <img width="100" height="100" title="Webpack Plugin" src="http://michael-ciniawsky.github.io/postcss-load-plugins/logo.svg">
   </div>
-  <h1>Webpack Dev Write To Disk Plugin</h1>
+  <h1>Write Assets Webpack Plugin</h1>
   <p>Force webpack-dev-server/webpack-dev-middleware/webpack-hot-middleware program to write bundle files to the file system.</p>
 </div>
+
+## Problem
+
+The `webpack-dev-server` (even when you use `webpack-dev-middleware/webpack-hot-middleware`) doesn't write files to disk.
+
+Relate issue on [webpack-dev-server repository](https://github.com/webpack/webpack-dev-server/issues/62) | [stackoverflow](https://stackoverflow.com/questions/33318457/bundle-js-file-output-and-webpack-dev-server).
+
+If you want to force webpack-dev-server to write to the file system, you can use this plugin.
 
 ## Install
 
@@ -44,12 +52,14 @@
 ```js
 const WriteAssetsWebpackPlugin = require('write-assets-webpack-plugin');
 ...
+// Webpack configuration
 module.exports = {
   entry: 'index.js',
   output: {
     path: __dirname + '/dist',
     filename: 'bundle.js'
   },
+  ...
   plugins: [
     new WriteAssetsWebpackPlugin({ force: true })
   ]
@@ -68,17 +78,22 @@ You're free to contribute to this project by submitting [issues](./issues) and/o
 * Commit messages must start with a capitalized and short summary.
 * After every commit, make sure the test suite passes.
 ```bash
-$ npm run test
+$ yarn run build:test
+$ yarn run test
 ```
 * To ensure consistency throughout the source code, keep these coding styles.
 ```bash
-$ npm run lint
+$ yarn run lint
+```
+* Or run development mode with eslint and babel auto transpiler
+```bash
+$ yarn run dev
 ```
 * Before you submit your Pull Request (PR) consider the open or closed PR that relates to your submission.
 
 ### Test local package
 
-You can testing this npm package before releasing it using [yarn link](https://yarnpkg.com/lang/en/docs/cli/link/)|[Verdaccio](https://github.com/verdaccio/verdaccio).
+You can testing this npm package before releasing it using [yarn link](https://yarnpkg.com/lang/en/docs/cli/link/) | [Verdaccio](https://github.com/verdaccio/verdaccio).
 ```bash
 # Create verdaccio container
 $ docker-compose up

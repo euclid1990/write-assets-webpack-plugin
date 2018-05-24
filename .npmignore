@@ -1,6 +1,7 @@
 src
 npx
 node_modules
+compiled_tests
 example/assets/js
 example/assets/css
 example/assets/img

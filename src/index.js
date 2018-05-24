@@ -43,7 +43,6 @@ class WriteAssetsWebpackPlugin {
       compiler.hooks.emit.tapAsync(pluginName, (compilation, callback) => {
         compilationPromise = new Promise((resolve, reject) => {
           let fileInfo = {
-            publicPath: compilation.outputOptions.publicPath,
             outputPath: compilation.outputOptions.path,
             assets: compilation.assets
           };
@@ -63,22 +62,29 @@ class WriteAssetsWebpackPlugin {
           })
           .then(() => compilationPromise)
           .then((fileInfo) => {
-            let { assets, outputPath } = fileInfo;
-            const emitFiles = err => {
-              if (err) throw err;
-              const iterator = this.iteratorAssets(outputPath);
-              asyncLib.each(assets, iterator, err => {
-                if (err) throw err;
-              });
-            };
-            // Make destination directory and create all asset files.
-            if (this.options.force) {
-              this.outputFileSystem.mkdirp(outputPath, emitFiles);
-            }
-
             let pluginArgs = {};
             this.debug(`${pluginName}: Dispatch Processing Event.`);
-            return applyPluginsAsyncWaterfall('webpack-dev-write-to-disk-processing', pluginArgs);
+            applyPluginsAsyncWaterfall('webpack-dev-write-to-disk-processing', pluginArgs);
+
+            let { assets, outputPath } = fileInfo;
+            const emitFiles = (done) => {
+              return (err) => {
+                if (err) throw err;
+                const iterator = this.iteratorAssets(outputPath);
+                asyncLib.each(assets, iterator, err => {
+                  if (err) throw err;
+                  return done();
+                });
+              };
+            };
+            return new Promise((res, rej) => {
+              // Make destination directory and create all asset files.
+              if (this.options.force) {
+                // Make callback done emit files
+                let done = () => { res('done') };
+                this.outputFileSystem.mkdirp(outputPath, emitFiles(done));
+              }
+            });
           })
           .then(() => {
             let pluginArgs = {};

@@ -3,7 +3,7 @@
 ## Usage
 
 ```bash
-npx webpack-dev-server  --context example --config example/webpack.config.js
+npx webpack-dev-server --context example --config example/webpack.config.js
 ```
 
 ## Confirm

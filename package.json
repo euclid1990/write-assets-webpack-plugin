@@ -26,9 +26,12 @@
   "scripts": {
     "lint": "npx watch 'npx eslint .; exit 0' --interval=0.25 --ignoreDirectoryPattern='/node_modules|dist/i'",
     "babel": "npx babel --source-maps --watch src --out-dir dist",
+    "babel:test": "npx babel --source-maps --watch tests --out-dir compiled_tests --ignore tests/fixtures",
+    "test": "npx mocha --timeout 5000 compiled_tests",
     "build": "npx babel src --out-dir dist",
-    "dev": "npx npm-run-all -p babel lint",
-    "example:start": "npx webpack-dev-server  --context example --config example/webpack.config.js",
+    "build:test": "npx ncp tests/fixtures compiled_tests/fixtures && npx babel --ignore tests/fixtures tests --out-dir compiled_tests --source-maps",
+    "dev": "npx npm-run-all -p babel babel:test build:test lint",
+    "example:start": "npx webpack-dev-server --context example --config example/webpack.config.js",
     "example:build": "npx webpack --context example --config example/webpack.config.js"
   },
   "dependencies": {
@@ -42,6 +45,7 @@
     "@babel/cli": "^7.0.0-beta.47",
     "@babel/core": "^7.0.0-beta.47",
     "@babel/preset-env": "^7.0.0-beta.47",
+    "chai": "^4.1.2",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
     "dotenv": "^5.0.1",
@@ -53,14 +57,18 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.1.0",
     "file-loader": "^1.1.11",
+    "globby": "^8.0.1",
     "html-webpack-plugin": "^3.2.0",
     "injection-js": "^2.2.1",
     "js-beautify": "^1.7.5",
     "mini-css-extract-plugin": "^0.4.0",
+    "mocha": "^5.2.0",
+    "ncp": "^2.0.0",
     "neo-async": "^2.5.1",
     "node-sass": "^4.9.0",
     "nodemon": "^1.17.4",
     "npm-run-all": "^4.1.3",
+    "rimraf": "^2.6.2",
     "sass-loader": "^7.0.1",
     "standard": "^11.0.1",
     "url-loader": "^1.0.1",
@@ -70,5 +78,8 @@
     "webpack-dev-middleware": "^3.1.3",
     "webpack-dev-server": "^3.1.4",
     "webpack-hot-middleware": "^2.22.2"
+  },
+  "peerDependencies": {
+    "webpack": "^4.0.0"
   }
 }

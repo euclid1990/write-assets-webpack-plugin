@@ -19,5 +19,7 @@ install:
 script:
   - yarn eslint .
   - yarn build
+  - yarn build:test
+  - yarn test
 cache:
   yarn: true

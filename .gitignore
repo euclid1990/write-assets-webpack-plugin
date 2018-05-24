@@ -2,6 +2,7 @@
 
 # compiled files
 /dist
+/compiled_tests
 
 # dependencies
 /node_modules
