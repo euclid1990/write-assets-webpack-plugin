@@ -29,8 +29,9 @@
     "babel:test": "npx babel --source-maps --watch tests --out-dir compiled_tests --ignore tests/fixtures",
     "test": "npx mocha --timeout 5000 compiled_tests",
     "build": "npx babel src --out-dir dist",
-    "build:test": "npx ncp tests/fixtures compiled_tests/fixtures && npx babel --ignore tests/fixtures tests --out-dir compiled_tests --source-maps",
-    "dev": "npx npm-run-all -p babel babel:test build:test lint",
+    "build:pretest": "npx ncp tests/fixtures compiled_tests/fixtures",
+    "build:test": "npx babel --ignore tests/fixtures tests --out-dir compiled_tests --source-maps",
+    "dev": "npx npm-run-all -p babel babel:test build:pretest lint",
     "example:start": "npx webpack-dev-server --context example --config example/webpack.config.js",
     "example:build": "npx webpack --context example --config example/webpack.config.js"
   },

@@ -16,6 +16,7 @@ module.exports = {
     }],
     'no-useless-constructor': 'off',
     'no-unused-vars': 'warn',
-    'eol-last': ['error', 'always']
+    'eol-last': ['error', 'always'],
+    'promise/param-names': 'never',
   }
 };

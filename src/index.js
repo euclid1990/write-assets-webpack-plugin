@@ -81,7 +81,7 @@ class WriteAssetsWebpackPlugin {
               // Make destination directory and create all asset files.
               if (this.options.force) {
                 // Make callback done emit files
-                let done = () => { res('done') };
+                let done = () => { res('done'); };
                 this.outputFileSystem.mkdirp(outputPath, emitFiles(done));
               }
             });

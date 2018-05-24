@@ -10,15 +10,17 @@ install:
   - yarn install --ignore-scripts
   - yarn remove webpack webpack-dev-server webpack-dev-middleware webpack-hot-middleware
   - |
-    yarn add
-      webpack@$WEBPACK_VERSION
-      webpack-dev-server@$WEBPACK_DEV_SERVER_VERSION
-      webpack-dev-middleware@$WEBPACK_DEV_MIDDLEWARE_VERSION
-      webpack-hot-middleware@$WEBPACK_HOT_MIDDLEWARE_VERSION
-      --ignore-scripts || true
+    yarn add \
+      webpack@$WEBPACK_VERSION \
+      webpack-dev-server@$WEBPACK_DEV_SERVER_VERSION \
+      webpack-dev-middleware@$WEBPACK_DEV_MIDDLEWARE_VERSION \
+      webpack-hot-middleware@$WEBPACK_HOT_MIDDLEWARE_VERSION \
+      --ignore-scripts
 script:
   - yarn eslint .
   - yarn build
+  - mkdir -p compiled_tests/fixtures
+  - yarn build:pretest
   - yarn build:test
   - yarn test
 cache:
