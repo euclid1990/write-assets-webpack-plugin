@@ -1,6 +1,7 @@
 'use strict';
 
 import '@babel/polyfill';
+import path from 'path';
 import _ from 'lodash';
 import camelcase from 'camelcase';
 import asyncLib from 'neo-async';
@@ -15,7 +16,7 @@ class WriteAssetsWebpackPlugin {
     // Default options
     this.options = _.extend({
       force: true,
-      rules: [],
+      extension: [],
       debug: false
     }, options);
     this.outputFileSystem = new NodeOutputFileSystem();
@@ -42,9 +43,15 @@ class WriteAssetsWebpackPlugin {
       // The Compiler begins with emitting the generated assets.
       compiler.hooks.emit.tapAsync(pluginName, (compilation, callback) => {
         compilationPromise = new Promise((resolve, reject) => {
+          let assets = compilation.assets;
+          // List only files of a particular extension
+          if (this.options.extension.length) {
+            assets = _.pickBy(compilation.assets, (v, k) => ~this.options.extension.indexOf(path.extname(k).substring(1)));
+          }
+
           let fileInfo = {
             outputPath: compilation.outputOptions.path,
-            assets: compilation.assets
+            assets: assets
           };
           this.debug(`${pluginName}: Get all assets information.`);
           callback();

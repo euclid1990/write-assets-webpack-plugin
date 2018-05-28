@@ -37,13 +37,13 @@ const stat = (inputFileSystem, path) => inputFileSystem.statSync(path);
 const readFile = (inputFileSystem, path) => inputFileSystem.readFileSync(path);
 
 // Ideally we pass in patterns and confirm the resulting assets
-const run = (opts = {}) => {
+const run = (opts = { pluginOptions: { debug: false }, compilerOptions: {} }) => {
   return new Promise((resolve, reject) => {
     // Init self plugin
-    const plugin = new WriteAssetsWebpackPlugin({ debug: false });
+    const plugin = new WriteAssetsWebpackPlugin(opts.pluginOptions);
 
     // Get a mock compiler to pass to plugin apply(compiler) method
-    const compiler = opts.compiler || new MockCompiler(opts.options || {});
+    const compiler = opts.compiler || new MockCompiler(opts.compilerOptions || {});
 
     // Call apply property by webpack compiler
     plugin.apply(compiler);
@@ -112,6 +112,17 @@ describe('WriteAssetsWebpackPlugin', function() {
           let buildFiles = globby.sync('*/**', { cwd: BUILD_DIR, onlyFiles: true });
           let assetFiles = globby.sync('*/**', { cwd: ASSETS_DIR, onlyFiles: true });
           expect(buildFiles).to.be.an('array').that.have.same.members(assetFiles);
+        })
+        .then(done);
+    });
+
+    it('write only image files to build directory', function(done) {
+      run({ pluginOptions: { debug: false, extension: ['png'] } })
+        .then(res => {
+          let buildFiles = globby.sync('*/**', { cwd: BUILD_DIR, onlyFiles: true });
+          buildFiles.forEach(e => {
+            expect(path.extname(e).substring(1)).to.equal('png');
+          });
         })
         .then(done);
     });

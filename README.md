@@ -61,7 +61,7 @@ module.exports = {
   },
   ...
   plugins: [
-    new WriteAssetsWebpackPlugin({ force: true })
+    new WriteAssetsWebpackPlugin({ force: true, extension: ['js'] })
   ]
 }
 ```
