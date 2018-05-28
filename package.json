@@ -1,6 +1,6 @@
 {
   "name": "write-assets-webpack-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Force webpack-dev-server/webpack-dev-middleware program to write bundle files to the file system.",
   "main": "./dist/index.js",
   "repository": {
