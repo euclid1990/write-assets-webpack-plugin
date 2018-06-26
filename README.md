@@ -6,7 +6,7 @@
 
 [npm]: https://img.shields.io/npm/v/write-assets-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/write-assets-webpack-plugin
-[npm-download]: https://img.shields.io/npm/dw/write-assets-webpack-plugin.svg
+[npm-download]: https://img.shields.io/npm/dt/write-assets-webpack-plugin.svg
 
 [node]: https://img.shields.io/node/v/write-assets-webpack-plugin.svg
 [node-url]: https://nodejs.org
