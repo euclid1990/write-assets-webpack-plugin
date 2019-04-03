@@ -1,6 +1,5 @@
 'use strict';
 
-import '@babel/polyfill';
 import path from 'path';
 import _ from 'lodash';
 import camelcase from 'camelcase';
