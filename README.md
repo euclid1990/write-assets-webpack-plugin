@@ -1,7 +1,6 @@
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
 ![npm][npm-download]
-[![deps][deps]][deps-url]
 [![tests][tests]][tests-url]
 
 [npm]: https://img.shields.io/npm/v/write-assets-webpack-plugin.svg
